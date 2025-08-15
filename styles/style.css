@@ -275,3 +275,29 @@ main {
     height: 200px;
     margin-top: 20px;
 }
+
+.expenses-list {
+    grid-column: 1 / -1;
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.expenses-list h2 {
+    color: var(--dark-color);
+    margin-bottom: 20px;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px ;
+}
+
+.filters select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+}

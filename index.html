@@ -103,7 +103,28 @@
             </section>
 
             <!-- expense list section -->
-            <section class="expense-list"></section>
+            <section class="expenses-list">
+                <h2>Recent Expenses</h2>
+                <div class="filters">
+                    <select id="filter-category">
+                        <option value="all">All Categories</option>
+                        <option value="food">Food</option>
+                        <option value="trasport">Transport</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="housing">Housing</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="health">Health</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <select id="filter-month">
+                        <option value="all">All Months</option>
+                        <!-- months will be loaded by js -->
+                    </select>
+                </div>
+                <div class="expenses-container">
+                    <!-- expenses will be loaded here by js -->
+                </div>
+            </section>
         </main>
     </div>
 
