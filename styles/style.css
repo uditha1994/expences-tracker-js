@@ -301,3 +301,36 @@ main {
     border-radius: var(--border-radius);
     font-size: 14px;
 }
+
+.expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.expense-item:last-child {
+    border-bottom: none !important;
+}
+
+.expense-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.expense-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 18px;
+}
+
+.expense-icon.entertainment {
+    background-color: #662e9b;
+}
