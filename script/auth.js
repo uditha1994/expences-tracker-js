@@ -65,6 +65,7 @@ signupBtn.addEventListener('click', (e) => {
                 console.log('User data saved!!');
                 authContainer.classList.add('hidden');
                 appContainer.classList.remove('hidden');
+                // signupForm.reset();
             });
         })
         .catch((error) => {
@@ -88,6 +89,7 @@ loginBtn.addEventListener('click', (e) => {
             console.log('User logged in: ', user);
             authContainer.classList.add('hidden');
             appContainer.classList.remove('hidden');
+            // loginForm.reset();
         })
         .catch((error) => {
             const errorCode = error.code;

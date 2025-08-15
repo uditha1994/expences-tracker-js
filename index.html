@@ -45,6 +45,47 @@
             <h1>Expense Tracker</h1>
             <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </header>
+
+        <main>
+            <!-- add expense section -->
+            <section class="add-expense">
+                <h2>Add New Expense</h2>
+                <form id="expense-form">
+                    <div class="form-group">
+                        <label for="expense-amount">Amount</label>
+                        <input type="number" id="expense-amount" placeholder="0.00" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-description">Description</label>
+                        <input type="text" id="expense-description" placeholder="what was this for?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-category">Category</label>
+                        <select id="expense-category" required>
+                            <option value="">Select a Category</option>
+                            <option value="food">Food</option>
+                            <option value="trasport">Transport</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="housing">Housing</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="health">Health</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-date">Date</label>
+                        <input type="date" id="expense-date" required>
+                    </div>
+                    <button type="submit">Add Expense</button>
+                </form>
+            </section>
+
+            <!-- add summary section -->
+            <section class="summary"></section>
+
+            <!-- expense list section -->
+            <section class="expense-list"></section>
+        </main>
     </div>
 
     <!-- firebase sdk -->
