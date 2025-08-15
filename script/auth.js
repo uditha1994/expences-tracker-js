@@ -71,4 +71,39 @@ signupBtn.addEventListener('click', (e) => {
             const errorMessage = error.message;
             alert(errorMessage);
         })
-})
+});
+
+//login function
+loginBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            //signed in
+            const user = userCredential.user;
+            console.log('User logged in: ', user);
+            authContainer.classList.add('hidden');
+            appContainer.classList.remove('hidden');
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage);
+        });
+});
+
+//auth state observer
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        //user is signed in
+        authContainer.classList.add('hidden');
+        appContainer.classList.remove('hidden');
+    } else {
+        //user is signed out
+        authContainer.classList.remove('hidden');
+        appContainer.classList.add('hidden');
+    }
+});
