@@ -12,6 +12,13 @@ let expenseChart;
 //initialize the app when DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('expense-date').valueAsDate = new Date();
+
+    //load expenses when user is logged in
+    auth.onAuthStateChanged((user) => {
+        if(user){
+            loadExpenses();
+        }
+    });
 });
 
 //Add new expense
@@ -37,13 +44,31 @@ expenseForm.addEventListener('submit', (e) => {
         category: category,
         date: date
     })
-    .then(()=>{
-        //clear form
-        expenseForm.reset();
-        document.getElementById('expense-date').valueAsDate = new Date();
-    })
-    .catch((error)=>{
-        console.error('Error in adding expense: ', error);
-    });
+        .then(() => {
+            //clear form
+            expenseForm.reset();
+            document.getElementById('expense-date').valueAsDate = new Date();
+        })
+        .catch((error) => {
+            console.error('Error in adding expense: ', error);
+        });
 
 });
+
+//Load expenses from firebase
+function loadExpenses() {
+    const userId = auth.currentUser.uid;
+    database.ref('expenses/' + userId).on('value', (snpashot) => {
+        const expenses = [];
+        snpashot.forEach((childSnapshot) => {
+            expenses.push({
+                id: childSnapshot.key,
+                ...childSnapshot.val()
+            });
+        });
+
+        renderExpenses(expenses);
+    });
+}
+
+function renderExpenses(expenses){}

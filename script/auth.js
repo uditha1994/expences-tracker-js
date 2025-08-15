@@ -65,7 +65,9 @@ signupBtn.addEventListener('click', (e) => {
                 console.log('User data saved!!');
                 authContainer.classList.add('hidden');
                 appContainer.classList.remove('hidden');
-                // signupForm.reset();
+                document.getElementById('signup-name').value = '';
+                document.getElementById('signup-email').value = '';
+                document.getElementById('signup-password').value = '';
             });
         })
         .catch((error) => {
@@ -89,7 +91,8 @@ loginBtn.addEventListener('click', (e) => {
             console.log('User logged in: ', user);
             authContainer.classList.add('hidden');
             appContainer.classList.remove('hidden');
-            // loginForm.reset();
+            document.getElementById('login-email').value = '';
+            document.getElementById('login-password').value = '';
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -101,7 +104,7 @@ loginBtn.addEventListener('click', (e) => {
 //logout function
 logoutBtn.addEventListener('click', () => {
     auth.signOut()
-        .then(()=>{
+        .then(() => {
             console.log('User signed out');
             authContainer.classList.remove('hidden');
             appContainer.classList.add('hidden');
