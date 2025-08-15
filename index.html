@@ -81,7 +81,26 @@
             </section>
 
             <!-- add summary section -->
-            <section class="summary"></section>
+            <section class="summary">
+                <h2>Monthly Summary</h2>
+                <div class="summary-cards">
+                    <div class="card">
+                        <h3>Total</h3>
+                        <p id="total-amount">LKR 0.00</p>
+                    </div>
+                    <div class="card">
+                        <h3>This Month</h3>
+                        <p id="monthly-amount">LKR 0.00</p>
+                    </div>
+                    <div class="card">
+                        <h3>Top Category</h3>
+                        <p id="top-category">-</p>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="expense-chart"></canvas>
+                </div>
+            </section>
 
             <!-- expense list section -->
             <section class="expense-list"></section>

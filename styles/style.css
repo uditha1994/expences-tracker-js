@@ -148,7 +148,7 @@ header {
     margin-bottom: 30px;
 }
 
-header h1{
+header h1 {
     color: var(--primary-color);
 }
 
@@ -166,4 +166,112 @@ header h1{
 
 #logout-btn:hover {
     background-color: #d1146a;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+}
+
+.add-expense {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    height: fit-content;
+}
+
+.add-expense h2 {
+    color: var(--dark-color);
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+}
+
+#expense-form button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#expense-form button:hover {
+    background-color: var(--secondary-color);
+}
+
+.summary {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.summary h2 {
+    color: var(--dark-color);
+    margin-bottom: 20px;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.card h3 {
+    color: var(--gray-color);
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#total-amount {
+    color: var(--primary-color);
+}
+
+#monthly-amount {
+    color: var(--accent-color);
+}
+
+#top-category {
+    color: var(--success-color);
+}
+
+.chart-container {
+    height: 200px;
+    margin-top: 20px;
 }
