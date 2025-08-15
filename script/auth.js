@@ -24,6 +24,7 @@ const showLogin = document.getElementById('show-login');
 const loginBtn = document.getElementById('login-btn');
 const signupBtn = document.getElementById('signup-btn');
 const appContainer = document.getElementById('app-container');
+const logoutBtn = document.getElementById('logout-btn');
 
 showSignup.addEventListener('click', () => {
     loginForm.style.display = 'none';
@@ -92,6 +93,19 @@ loginBtn.addEventListener('click', (e) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             alert(errorMessage);
+        });
+});
+
+//logout function
+logoutBtn.addEventListener('click', () => {
+    auth.signOut()
+        .then(()=>{
+            console.log('User signed out');
+            authContainer.classList.remove('hidden');
+            appContainer.classList.add('hidden');
+        })
+        .catch((error) => {
+            console.error('signout error', error);
         });
 });
 
