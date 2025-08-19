@@ -334,3 +334,70 @@ main {
 .expense-icon.entertainment {
     background-color: #662e9b;
 }
+
+.expense-icon.food {
+    background-color: #ff9f1c;
+}
+
+.expense-icon.transport {
+    background-color: #2ec4b6;
+}
+
+.expense-icon.housing {
+    background-color: #e71d36;
+}
+
+.expense-icon.entertainment {
+    background-color: #662e9b;
+}
+
+.expense-icon.shopping {
+    background-color: #ff6b6b;
+}
+
+.expense-icon.health {
+    background-color: #665e88;
+}
+
+.expense-icon.other {
+    background-color: var(--gray-color);
+}
+
+.expense-details h3 {
+    font-size: 16px;
+    margin-bottom: 3px;
+}
+
+.expense-details p {
+    font-size: 14px;
+    color: var(--gray-color);
+}
+
+.expense-amount {
+    font-weight: 600;
+}
+
+.expense-action {
+    display: flex;
+    gap: 10px;
+}
+
+.expense-action button {
+    background: none;
+    border: none;
+    color: var(--gray-color);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.expense-action button:hover {
+    color: var(--dark-color);
+}
+
+.expense-action .edit-btn:hover {
+    color: var(--accent-color);
+}
+
+.expense-action .delete-btn:hover {
+    color: var(--danger-color);
+}

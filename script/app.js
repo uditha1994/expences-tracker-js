@@ -126,7 +126,68 @@ function renderExpenses(expenses) {
 
         expensesContainer.appendChild(expenseElement);
     });
+
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const expenseId = e.currentTarget.getAttribute('data-id');
+            updateExpense(expenseId);
+        });
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const expenseId = e.currentTarget.getAttribute('data-id');
+            deleteExpense(expenseId);
+        })
+    })
 }
+
+function updateExpense(expenseId) {
+    const userId = auth.currentUser.uid;
+
+    database.ref('expenses/' + userId + '/' + expenseId).once('value')
+        .then((snpashot) => {
+            const expense = snpashot.val();
+
+            //fill form with expense data
+            document.getElementById('expense-amount').value = expense.amount;
+            document.getElementById('expense-description').value = expense.description;
+            document.getElementById('expense-category').value = expense.category;
+            document.getElementById('expense-date').value = expense.date;
+
+            const formButton = expenseForm.querySelector('button');
+            formButton.textContent = 'Update Expense';
+
+            //remove previous submit event listener
+            expenseForm.replaceWith(expenseForm.cloneNode(true));
+            document.getElementById('expense-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const updatedAmount =
+                    parseFloat(document.getElementById('expense-amount').value);
+                const updatedDescription = document.getElementById('expense-description').value;
+                const updatedCategory = document.getElementById('expense-category').value;
+                const updatedDate = document.getElementById('expense-date').value;
+
+                database.ref('expenses/' + userId + '/' + expenseId).update({
+                    amount: updatedAmount,
+                    description: updatedDescription,
+                    category: updatedCategory,
+                    date: updatedDate
+                }).then(() => {
+                    expenseForm.reset();
+                    formButton.textContent = 'Add Expense';
+                    document.getElementById('expense-date').valueAsDate = new Date();
+                })
+                    .catch((error) => {
+                        console.log(error.message);
+                    });
+            });
+        });
+}
+
+function deleteExpense(expenseId) { }
+
 
 //Helper function
 function getCategoryIcon(category) {
