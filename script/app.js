@@ -70,6 +70,7 @@ function loadExpenses() {
 
         renderExpenses(expenses);
         updateSummary(expenses);
+        renderChart(expenses);
     });
 }
 
@@ -279,7 +280,65 @@ function updateSummary(expenses) {
 }
 
 //Render chart
+function renderChart(expenses) {
+    const ctx = document.getElementById('expense-chart').getContext('2d');
 
+    //group expenses by month
+    const monthlyData = {};
+    expenses.forEach(expense => {
+        const date = new Date(expense.date);
+        const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`;
+        if (!monthlyData[monthYear]) {
+            monthlyData[monthYear] = 0;
+        }
+        monthlyData[monthYear] += parseFloat(expense.amount);
+    });
+
+    //sort months
+    const sortedMonths = Object.keys(monthlyData).sort();
+    const labels = sortedMonths.map(month => {
+        const [year, monthNum] = month.split('-');
+        return new Date(year, monthNum - 1).toLocaleDateString
+            ('en-US', { month: 'short', year: 'numeric' });
+    });
+    const data = sortedMonths.map(month => monthlyData[month]);
+
+    //destroy previous chart if exists
+    if (expenseChart) {
+        expenseChart.destroy();
+    }
+
+    //create new chart
+    expenseChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Monthly Spending',
+                data: data,
+                backgroundColor: 'rgba(67,97, 238, 0.2)',
+                borderColor: 'rgba(67,97,138,1)',
+                borderWidth: 2,
+                tension: 0.1,
+                fill:true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                } 
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
 
 //Helper function
 function getCategoryIcon(category) {
