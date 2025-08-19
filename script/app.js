@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     auth.onAuthStateChanged((user) => {
         if (user) {
             loadExpenses();
+            setupEventListeners();
         }
     });
 });
@@ -200,6 +201,39 @@ function deleteExpense(expenseId) {
     }
 }
 
+//setup event listeners for filters
+function setupEventListeners() {
+    filterCategory.addEventListener('change', () => {
+        loadExpenses();
+    });
+
+    //populate month filter
+    const months = [
+        { value: '1', name: 'January' },
+        { value: '2', name: 'February' },
+        { value: '3', name: 'March' },
+        { value: '4', name: 'April' },
+        { value: '5', name: 'May' },
+        { value: '6', name: 'June' },
+        { value: '7', name: 'July' },
+        { value: '8', name: 'August' },
+        { value: '9', name: 'September' },
+        { value: '10', name: 'October' },
+        { value: '11', name: 'November' },
+        { value: '12', name: 'December' }
+    ]
+
+    months.forEach(month => {
+        const option = document.createElement('option');
+        option.value = month.value;
+        option.textContent = month.name;
+        filterMonth.appendChild(option);
+    });
+
+    filterMonth.addEventListener('change', () => {
+        loadExpenses();
+    });
+}
 
 //Helper function
 function getCategoryIcon(category) {
