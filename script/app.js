@@ -69,6 +69,7 @@ function loadExpenses() {
         });
 
         renderExpenses(expenses);
+        updateSummary(expenses);
     });
 }
 
@@ -234,6 +235,51 @@ function setupEventListeners() {
         loadExpenses();
     });
 }
+
+//update summary card
+function updateSummary(expenses) {
+    //calculate total amount
+    const totalAmount =
+        expenses.reduce((sum, expense) => sum + parseFloat(expense.amount), 0);
+
+    //calculate current month amount
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1;
+    const monthlyAmount = expenses.reduce((sum, expense) => {
+        const expenseDate = new Date(expense.date);
+        if (expenseDate.getMonth + 1 === currentMonth &&
+            expenseDate.getFullYear === currentYear) {
+            return sum + parseFloat(expense.amount);
+        }
+        return sum;
+    }, 0);
+
+    //find top category
+    const categoryTotals = {};
+    expenses.forEach(expense => {
+        if (!categoryTotals[expense.category]) {
+            categoryTotals[expense.category] = 0;
+        }
+        categoryTotals[expense.category] += parseFloat(expense.amount);
+    });
+
+    let topCategory = '-';
+    let maxAmount = 0;
+    for (const category in categoryTotals) {
+        if (categoryTotals[category] > maxAmount) {
+            maxAmount = categoryTotals[category];
+            topCategory = category.charAt(0).toUpperCase() +
+                category.slice(1);
+        }
+    }
+
+    totalAmountElement.textContent = `LKR ${totalAmount.toFixed(2)}`;
+    monthlyAmountElement.textContent = `LKR ${monthlyAmount.toFixed(2)}`
+    topCategoryElement.textContent = topCategory;
+}
+
+//Render chart
+
 
 //Helper function
 function getCategoryIcon(category) {
