@@ -175,6 +175,7 @@ function updateExpense(expenseId) {
                     category: updatedCategory,
                     date: updatedDate
                 }).then(() => {
+                    alert('ok');
                     expenseForm.reset();
                     formButton.textContent = 'Add Expense';
                     document.getElementById('expense-date').valueAsDate = new Date();
@@ -186,7 +187,18 @@ function updateExpense(expenseId) {
         });
 }
 
-function deleteExpense(expenseId) { }
+function deleteExpense(expenseId) {
+    if (confirm('Are you sure want to delete this expense?')) {
+        const userId = auth.currentUser.uid;
+        database.ref('expenses/' + userId + '/' + expenseId).remove()
+            .then(() => {
+                console.log('Expense deleted');
+            })
+            .catch((error) => {
+                console.error("Error deleting expense: ", error);
+            });
+    }
+}
 
 
 //Helper function
